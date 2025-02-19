@@ -1,0 +1,34 @@
+{% extends 'layouts/page.njk' %}
+
+{% block head %}
+  {{ super() }}
+  <meta http-equiv="refresh" content="1">
+{% endblock %}
+
+{% block content %}
+  {{ appHeading({
+    title: heading,
+    caption: "Virus check."
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-body" data-testid="app-page-body">
+
+        <p>
+          Your file is currently being checked for viruses {{ appLoader({ classes: "app-loader--is-loading" }) }}
+        </p>
+        <div style='height: 50em;'></div>
+      </div>
+    </div>
+    <div class="govuk-grid-column-one-thirds">
+      <h4>Developer notes</h4>
+      <p>
+      <i>Behind the scenes we're polling the cdp-uploader /status/<id> endpoint to find out what's going on with our upload.</i>
+      </p>
+      <pre>{{ status }}</pre>
+    </div>
+  </div>
+
+
+{% endblock %}

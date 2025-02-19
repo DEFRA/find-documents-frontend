@@ -1,0 +1,37 @@
+{% extends 'layouts/page.njk' %}
+
+{% block content %}
+  {{ appHeading({
+    title: heading,
+    caption: "File upload complete"
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-body" data-testid="app-page-body">
+
+        <p>
+          The file was uploaded and scanned. No issues were found and it was uploaded to S3.
+        </p>
+        <p>Here's the S3 metadata:</p>
+        <pre style='overflow: clip;'>{{ metadata }}</pre>
+
+        <div style='height: 50em;'></div>
+      </div>
+    </div>
+    <div class="govuk-grid-column-one-thirds">
+      <h4>Developer notes</h4>
+      <p>
+        <i>This page is displayed after polling the cdp-uploader /status end until it tells us the uploadStatus is 'ready'.</i>
+      </p>
+      <p>
+        <i>The frontend is never sent the uploaded file directly. Instead it gets the S3 location where the uploaded file can be found.</i>
+      </p>
+      <p>
+        <i>If the uploaded file has a virus it will not be uploaded to S3, instead you will get an error message explaining why the file was rejected.</i>
+      </p>
+    </div>
+  </div>
+
+
+{% endblock %}

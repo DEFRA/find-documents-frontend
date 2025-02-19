@@ -203,6 +203,23 @@ export const config = convict({
       env: 'REDIS_TLS'
     }
   }),
+  localstackEndpoint: {
+    doc: 'Localstack endpoint',
+    format: String,
+    default: 'http://localhost:4566'
+  },
+  bucket: {
+    doc: 'Bucket name',
+    format: String,
+    default: 'find-documents-frontend',
+    env: 'BUCKET'
+  },
+  cdpUploaderUrl: {
+    doc: 'CDP Uploader root url',
+    format: String,
+    default: 'http://localhost:7337',
+    env: 'CDP_UPLOADER_URL'
+  },
   nunjucks: {
     watch: {
       doc: 'Reload templates when they are changed.',

@@ -1,0 +1,65 @@
+{% extends 'layouts/page.njk' %}
+
+{% block content %}
+  {{ appHeading({
+    title: heading,
+    caption: "Upload any file."
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-body" data-testid="app-page-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data">
+
+          {% call govukFieldset() %}
+
+            {{ govukFileUpload({
+              id: "basicfile",
+              name: "basicfile",
+              label: {
+                text: "Any file",
+                classes: "govuk-label--m"
+              },
+              hint: {
+                text: "Any file with a max size of 100 MB."
+              },
+              errorMessage: {
+                text: formErrors.basicfile.message
+              } if formErrors.basicfile.message
+            }) }}
+
+          {% endcall %}
+
+          {{ govukButton({
+            text: "Upload"
+          }) }}
+
+        </form>
+
+      </div>
+      <div style='height: 50em;'></div>
+    </div>
+
+    <div class="govuk-grid-column-one-thirds">
+      <h4>Developer notes</h4>
+
+      <i>Before rendering this page, the frontend has made a POST call to CDP-Uploader's /initiate endpoint (<a href="https://github.com/DEFRA/cdp-uploader?tab=readme-ov-file#post-initiate">docs</a>).</i>
+<pre>
+{
+  redirect: `${config.get('appBaseUrl')}/basic/complete`,
+  s3Bucket: config.get('bucket')
+}
+</pre>
+
+
+      <i>
+      The uploader responds with a payload containing an 'uploadUrl' which is used in this form's 'action' field, meaning the data is sent to cdp-uploader rather than the example frontend.
+      </i>
+      <pre>{ uploadUrl: {{ action }} }</pre>
+
+      <i>The upload url is unique and single use. One url per upload. If you refresh the page you will see a new upload url being generated.</i>
+    </div>
+  </div>
+
+
+{% endblock %}
