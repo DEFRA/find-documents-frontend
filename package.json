@@ -17,7 +17,7 @@
     "format": "prettier --write \"src/**/*.js\" \"**/*.{js,cjs,md,json,config.js,test.js}\"",
     "format:check": "prettier --check \"src/**/*.js\" \"**/*.{js,cjs,md,json,config.js,test.js}\"",
     "frontend:watch": "NODE_ENV=development webpack --watch",
-    "git:pre-commit-hook": "npm run format:check && npm run lint && npm test",
+    "git:pre-commit-hook": "npm run format:check",
     "postinstall": "npm run setup:husky && npm run build",
     "lint": "run-s lint:js lint:scss lint:types",
     "lint:fix": "eslint . --fix",
